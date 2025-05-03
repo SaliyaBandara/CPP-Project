@@ -15,9 +15,9 @@ public:
 
     void start();
     void stop();
-    void waitForCompletion(); 
+    void waitForCompletion();
 
-    void addTask(std::function<void()> task); 
+    void addTask(std::function<void()> task);
     size_t getTaskCount() const;
 
     void setNumThreads(size_t numThreads);
@@ -28,18 +28,17 @@ public:
     bool isRunning() const;
 
 private:
-    void workerThread(size_t threadId); 
+    void workerThread(size_t threadId);
 
-    void processNextTask(); 
+    void processNextTask();
 
     std::vector<std::thread> threads;
     std::queue<std::function<void()>> taskQueue;
     mutable std::mutex taskMutex;
-    mutable std::mutex completionMutex; 
+    mutable std::mutex completionMutex;
     std::condition_variable taskCondition;
     std::atomic<bool> running{false};
     std::atomic<size_t> activeThreads{0};
     size_t numThreads;
-
-    std::vector<std::atomic<size_t>> threadLoads; 
+    std::vector<size_t> threadLoads;
 };

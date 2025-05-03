@@ -48,7 +48,6 @@ private:
     double fieldSize; 
     const double timeStep; 
 
-    std::vector<std::thread> workerThreads;
     std::mutex simulationMutex;
     std::mutex particleMutex;  
     std::condition_variable cv;
